@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  test:
+    docker:
+      - image: circleci/python:3.7.0
+
+    steps:
+      - checkout
+
+      - run:
+          name: install spectacles
+          command: |
+            sudo pip3 install git+https://github.com/spectacles-ci/spectacles.git@fix/expired-result
+
+      - run:
+          name: spectacles connect
+          command: |
+            spectacles connect -v
+
+      - run:
+          name: spectacles sql
+          command: |
+            spectacles sql --project welcome_to_looker --branch $CIRCLE_BRANCH --batch -v
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
