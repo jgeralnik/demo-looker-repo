@@ -1,4 +1,4 @@
-connection: "snowlooker"
+connection: "snowflake"
 label: "1) eCommerce with Event Data"
 
 test: there_are_orders {
